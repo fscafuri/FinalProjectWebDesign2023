@@ -6,8 +6,11 @@ namespace FinalProjectTask.Controllers
 	[Route("api/tasks")]
 	public class TasksController : ControllerBase
 	{
+		//list of all tasks
 		private static List<Task> tasks = new List<Task>();
 
+
+		//displaying the tasks
 		[HttpGet]
 		public IActionResult GetAllTasks()
 		{
@@ -15,6 +18,8 @@ namespace FinalProjectTask.Controllers
 		}
 
 		[HttpGet("completed")]
+
+		//Displaying all completed tasks
 		public IActionResult GetAllCompletedTasks()
 		{
 			List<Task> completedTasks = new List<Task>();
@@ -30,6 +35,8 @@ namespace FinalProjectTask.Controllers
 			return Ok(completedTasks);
 		}
 
+
+		//displaying a task by id
 		[HttpGet("{id}")]
 		public IActionResult GetTaskById(int id)
 		{
@@ -44,6 +51,8 @@ namespace FinalProjectTask.Controllers
 
 		}
 
+
+		//adding a new task
 		[HttpPost]
 		public IActionResult AddTask([FromBody] Task newTask)
 		{
@@ -52,6 +61,8 @@ namespace FinalProjectTask.Controllers
 			return Ok(newTask);
 		}
 
+
+		//deleting a task by id
 		[HttpDelete("{id}")]
 		public IActionResult RemoveTask(int id)
 		{
@@ -70,6 +81,8 @@ namespace FinalProjectTask.Controllers
 			return Ok();
 		}
 
+
+		//editing the description or due date by id
 		[HttpPut("{id}")]
 		public IActionResult EditTask(int id, [FromBody] Task updatedTask)
 		{
@@ -93,6 +106,8 @@ namespace FinalProjectTask.Controllers
 			return Ok(taskToUpdate);
 		}
 
+
+		//marking if a task is completed by id
 		[HttpPost("{id}/complete")]
 		public IActionResult MarkTaskAsCompleted(int id)
 		{
@@ -116,6 +131,8 @@ namespace FinalProjectTask.Controllers
 			return Ok(taskToComplete);
 		}
 
+
+		//sorting the task by description, due date, or by id
 
 		[HttpGet("sorted")]
 		public IActionResult GetSortedTasks(string sortBy)
@@ -143,6 +160,8 @@ namespace FinalProjectTask.Controllers
 			return Ok(sortedTasks);
 		}
 
+
+		//seraching for a task by description
 		[HttpGet("search")]
 		public IActionResult SearchTasks(string searchTerm)
 		{
@@ -162,6 +181,8 @@ namespace FinalProjectTask.Controllers
 			return Ok(searchResults);
 		}
 
+
+		//filtering the task the task by by completion date and due/completion dates
 		[HttpGet("filtered")]
 		public IActionResult GetFilteredTasks(bool? isCompleted, DateTime? dueDate, DateTime? completionDate)
 		{
